@@ -5,7 +5,37 @@ import java.util.Scanner;
 
 public class TradeManager {
     public static void main(String[] args) {
-        System.out.println("Welcome to the Tariff Management System");
+    	Scanner scanner = new Scanner(System.in);
+    	while(true) {
+        System.out.println("1. Process Trade Data (Part 1)");
+        System.out.println("2. Resolve Trade Disputes (Part 2)");
+        System.out.println("3. quit");
+
+        int choice = scanner.nextInt();
+
+        if (choice == 1) {
+            part1Imp();
+        } else if (choice == 2) {
+        	part2Imp();
+        }else if(choice == 3) {
+        	scanner.close();
+        	System.exit(1);
+        }
+    }
+    }
+    public static void part1Imp() {
+    	try {
+			Controller.addTariffs("src/files/TradeData.txt","src/files/UpdatedTradeData.txt");
+			System.out.println("Check UpdatedTradeData.txt");
+		} catch (FileNotFoundException e) {
+			System.out.println("Error: file not found in src folder.");
+            System.exit(1);
+			
+		} 
+    }
+    
+    public static void part2Imp() {
+    	System.out.println("Welcome to the Tariff Management System");
         System.out.println("Developed by [Your Name], Student ID: [Your ID]");
         System.out.println("---------------------------------------------\n");
 

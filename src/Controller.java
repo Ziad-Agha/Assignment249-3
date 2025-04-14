@@ -8,31 +8,28 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Controler {
+public class Controller {
 
 	private static ArrayList<Product> products = new ArrayList<>();
 
-	public static void addtarrifs(String filePath) throws FileNotFoundException {
+	public static void addTariffs(String filePath, String updatedFilePath) throws FileNotFoundException {
 		readDataFile(filePath);
 		applyTariffs();
-		writeProducts(filePath);
+		writeProducts(updatedFilePath);
 	}
 
 	private static void readDataFile(String filePath) throws FileNotFoundException {
-		Scanner reader = null;
-		try {
-			reader = new Scanner(new FileInputStream(filePath));
-			String[] line = new String[4];
+		try (
+		Scanner reader = new Scanner(new FileInputStream(filePath))) {
+			String[] line;
 			while (reader.hasNextLine()) {
-				line = reader.nextLine().split(",");
+				String words = reader.nextLine();
+				System.out.println(words);
+				line = words.split(",");
 
 				products.add(new Product(line[0], line[1], line[2], Double.parseDouble(line[3])));
 			}
-		} catch (FileNotFoundException e) {
-			System.out.println("TradeData.txt was not found");
-			System.exit(0);
-
-		}
+		} 
 		Collections.sort(products);
 
 	}
@@ -85,10 +82,11 @@ public class Controler {
 		}
 	}
 
-	private static void writeProducts(String filePath) {
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/"+filePath))) {
+	private static void writeProducts(String filePath) throws FileNotFoundException {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 			for (Product product : products) {
 				writer.write(product.toString());
+				writer.newLine();
 			}
 		} catch (IOException e) {
 			System.out.println("Error writing to file: " + filePath);

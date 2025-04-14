@@ -45,6 +45,13 @@ public class Product implements Comparable<Product> {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return name + "," + country + "," + category + "," + price;
+	}
 
 	@Override
 	public int compareTo(Product other) {

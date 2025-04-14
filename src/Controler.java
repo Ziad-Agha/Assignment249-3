@@ -1,3 +1,4 @@
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -85,9 +86,9 @@ public class Controler {
 	}
 
 	private static void writeProducts(String filePath) {
-		try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/"+filePath))) {
 			for (Product product : products) {
-				writer.println(product.toString());
+				writer.write(product.toString());
 			}
 		} catch (IOException e) {
 			System.out.println("Error writing to file: " + filePath);

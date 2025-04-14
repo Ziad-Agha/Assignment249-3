@@ -15,7 +15,7 @@ public class TradeManager {
 
         // Part (b): Read Tariffs.txt and populate tariffList1
         try {
-            Scanner tariffScanner = new Scanner(new File("src/Tariffs.txt"));
+            Scanner tariffScanner = new Scanner(new File("src/files/Tariffs.txt"));
             while (tariffScanner.hasNextLine()) {
                 String line = tariffScanner.nextLine().trim();
                 if (!line.isEmpty()) {
@@ -43,7 +43,7 @@ public class TradeManager {
         // Part (c): Process TradeRequests.txt
         ArrayList<String> tradeRequests = new ArrayList<>();
         try {
-            Scanner tradeScanner = new Scanner(new File("src/TradeRequests.txt"));
+            Scanner tradeScanner = new Scanner(new File("src/files/TradeRequests.txt"));
             while (tradeScanner.hasNextLine()) {
                 String line = tradeScanner.nextLine().trim();
                 if (!line.isEmpty()) {

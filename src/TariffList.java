@@ -142,6 +142,7 @@ public class TariffList implements TariffPolicy {
 			if(position.getTariff().getOriginCountry().equals(origin) && 
 			   position.getTariff().getDestinationCountry().equals(destination) && 
 			   position.getTariff().getProductCategory().equals(category) ) {
+				System.out.println(i+" iterations were made.");
 				return position;
 				
 			}

@@ -14,18 +14,26 @@ public class TariffList implements TariffPolicy {
 			this.next = next;
 		}
 		public TariffNode(TariffNode obj) {
-			if(obj!=null) {
-			this.tariff = new Tariff(obj.tariff);
-			this.next = new TariffNode(obj.next);
-			}
+		    if (obj != null) {
+		        this.tariff = new Tariff(obj.tariff); 
+		        this.next = (obj.next != null) ? new TariffNode(obj.next) : null;
+		    }
 		}
 		public TariffNode clone() {
 			return new TariffNode(this);
 		}
 		public boolean equals(TariffNode node) {
-			return this.tariff.equals(node.tariff)&&
-					this.next.equals(node.next);
-			}
+		    if (node == null) 
+		    	return false;
+
+		    boolean tariffsEqual = (this.tariff == null && node.tariff == null) ||
+		                           (this.tariff != null && this.tariff.equals(node.tariff));
+
+		    boolean nextEqual = (this.next == null && node.next == null) ||
+		                        (this.next != null && this.next.equals(node.next));
+
+		    return tariffsEqual && nextEqual;
+		}
 		public Tariff getTariff() {
 			return tariff;
 		}
@@ -104,6 +112,9 @@ public class TariffList implements TariffPolicy {
 	}
 	
 	public void deleteFromStart() {
+		if (head == null) {
+			return;
+		}
 		TariffNode temporary = head;
 		head = head.next;
 		temporary.next = null;
@@ -123,16 +134,78 @@ public class TariffList implements TariffPolicy {
 	}
 	
 	public TariffNode find(String origin, String destination, String category) {
+		if (head == null) {
+			return null;
+		}
+		TariffNode position = head;
 		for(int i = 0; i < size; i++) {
+			if(position.getTariff().getOriginCountry().equals(origin) && 
+			   position.getTariff().getDestinationCountry().equals(destination) && 
+			   position.getTariff().getProductCategory().equals(category) ) {
+				return position;
+				
+			}
+			position = position.next;
+			
 			
 		}
+		return null;
 	}
 	
+	public boolean contains(String origin, String destination, String category) {
+		if (head == null) {
+			return false;
+		}
+		TariffNode position = head;
+		for(int i = 0; i < size; i++) {
+			if(position.getTariff().getOriginCountry().equals(origin) && 
+			   position.getTariff().getDestinationCountry().equals(destination) && 
+			   position.getTariff().getProductCategory().equals(category) ) {
+				return true;
+				
+			}
+			position = position.next;
+			
+			
+		}
+		return false;
+	}
+	public boolean equals(TariffList list) {
+		return this.head.equals(list.head) && this.size==list.size;
+		
+	}
+	
+	
+
+	public TariffNode getHead() {
+		return head;
+	}
+
+	public void setHead(TariffNode head) {
+		this.head = head;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
 
 	@Override
 	public String evaluateTrade(double proposedTariff, double minimumTariff) {
-		// TODO Auto-generated method stub
-		return null;
+		// Trade Request Accepted
+	    if (proposedTariff >= minimumTariff) {
+	        return "Trade request accepted.";
+	    }
+	    
+	    double tariffDifference = minimumTariff - proposedTariff;
+	    if (tariffDifference <= minimumTariff * 0.20) {
+	        return "Trade request conditionally accepted.";
+	    }
+	    
+	    return "Trade request rejected.";
 	}
 	
 

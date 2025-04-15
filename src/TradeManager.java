@@ -4,6 +4,9 @@
 // Written by: Ziad Agha (40312869) and Abderrahmane Bensassi-Nour (40317017)
 //----------------------------------------------------------
 
+//This program manages trade requests and tariffs for imported commercial products. It checks if the import requests received
+//respect the  countrie's tariff rules and tells the requester if the imported tradable products are accepted or rejected.
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

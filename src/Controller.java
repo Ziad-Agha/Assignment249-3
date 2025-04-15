@@ -1,3 +1,9 @@
+//----------------------------------------------------------
+// Assignment 3
+// Question: part 1
+// Written by: Ziad Agha (40312869) and Abderrahmane Bensassi-Nour (40317017)
+//----------------------------------------------------------
+
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,12 +18,14 @@ public class Controller {
 
 	private static ArrayList<Product> products = new ArrayList<>();
 
+	//static method that reads the Data file, applies the tarrifs and writes the reslting information on the updated data file
 	public static void addTariffs(String filePath, String updatedFilePath) throws FileNotFoundException {
 		readDataFile(filePath);
 		applyTariffs();
 		writeProducts(updatedFilePath);
 	}
-
+	
+	//read the Data file and save the products in an arraylist
 	private static void readDataFile(String filePath) throws FileNotFoundException {
 		try (
 		Scanner reader = new Scanner(new FileInputStream(filePath))) {
@@ -33,7 +41,8 @@ public class Controller {
 		Collections.sort(products);
 
 	}
-
+	
+	//apply the appropriate tariffs to each product in the arraylist
 	private static void applyTariffs() {
 		for (Product product : products) {
 			String country = product.getCountry();
@@ -81,7 +90,8 @@ public class Controller {
 			product.setPrice(newPrice);
 		}
 	}
-
+	
+	//write the results in the updated data file
 	private static void writeProducts(String filePath) throws FileNotFoundException {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 			for (Product product : products) {

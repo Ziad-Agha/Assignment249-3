@@ -1,7 +1,14 @@
+//----------------------------------------------------------
+// Assignment 3
+// Question: part 2
+// Written by: Ziad Agha (40312869) and Abderrahmane Bensassi-Nour (40317017)
+//----------------------------------------------------------
+
 import java.util.NoSuchElementException;
 
 public class TariffList implements TariffPolicy {
 	
+	//Inner class for nodes
 	public class TariffNode{
 		private Tariff tariff;
 		private TariffNode next;
@@ -9,6 +16,8 @@ public class TariffList implements TariffPolicy {
 			this.tariff=null;
 			this.next=null;
 		}
+		
+		//Constructors
 		public TariffNode(Tariff tariff, TariffNode next) {
 			this.tariff = tariff;
 			this.next = next;
@@ -19,9 +28,13 @@ public class TariffList implements TariffPolicy {
 		        this.next = (obj.next != null) ? new TariffNode(obj.next) : null;
 		    }
 		}
+		
+		//Clone method
 		public TariffNode clone() {
 			return new TariffNode(this);
 		}
+		
+		//equals
 		public boolean equals(TariffNode node) {
 		    if (node == null) 
 		    	return false;
@@ -34,6 +47,8 @@ public class TariffList implements TariffPolicy {
 
 		    return tariffsEqual && nextEqual;
 		}
+		
+		//Getters and Setters
 		public Tariff getTariff() {
 			return tariff;
 		}
@@ -48,9 +63,12 @@ public class TariffList implements TariffPolicy {
 		}
 		
 	}
+	
+	//Attributes for the Linkedlist
 	private TariffNode head;
 	private int size;
 	
+	//Constructors
 	public TariffList() {
 		head = null;
 		size = 0;
@@ -61,6 +79,7 @@ public class TariffList implements TariffPolicy {
 		this.size = obj.size;
 	}
 	
+	//Add new product to the beginning of the list
 	public void addToStart(Tariff t) {
 		TariffNode tariff = new TariffNode(t,null);
 		tariff.next = head;
@@ -68,6 +87,7 @@ public class TariffList implements TariffPolicy {
 		size++;
 	}
 	
+	//Add a new product at a certain index
 	public void insertAtIndex(Tariff newTariff, int index) throws NoSuchElementException{
 		//check if index is valid
 		if(index < 0 || index >= this.size) {
@@ -90,6 +110,7 @@ public class TariffList implements TariffPolicy {
 		size++;
 	}
 	
+	//Remove an element from a certain index
 	public void removeFromIndex(int index) throws NoSuchElementException{
 		//check if index is valid
 		if(index < 0 || index >= size) {
@@ -111,6 +132,7 @@ public class TariffList implements TariffPolicy {
 		size--;
 	}
 	
+	//Remove the first product
 	public void deleteFromStart() {
 		if (head == null) {
 			return;
@@ -121,6 +143,7 @@ public class TariffList implements TariffPolicy {
 		size--;
 	}
 	
+	//Replace a product at a certain index
 	public void replaceAtIndex(Tariff newTariff, int index) {
 		//check if index is valid
 		if(index < 0 || index >= size) {
@@ -133,6 +156,7 @@ public class TariffList implements TariffPolicy {
 		position.setTariff(newTariff);
 	}
 	
+	//Find a certain product in the linked list using its information
 	public TariffNode find(String origin, String destination, String category) {
 		if (head == null) {
 			return null;
@@ -153,6 +177,7 @@ public class TariffList implements TariffPolicy {
 		return null;
 	}
 	
+	//Check if the list contains a certain product
 	public boolean contains(String origin, String destination, String category) {
 		if (head == null) {
 			return false;
@@ -171,13 +196,15 @@ public class TariffList implements TariffPolicy {
 		}
 		return false;
 	}
+	
+	//equals
 	public boolean equals(TariffList list) {
 		return this.head.equals(list.head) && this.size==list.size;
 		
 	}
 	
 	
-
+	//Getters and Setters
 	public TariffNode getHead() {
 		return head;
 	}
@@ -193,7 +220,8 @@ public class TariffList implements TariffPolicy {
 	public void setSize(int size) {
 		this.size = size;
 	}
-
+	
+	//Implemented class from the interface, status of a trade request
 	@Override
 	public String evaluateTrade(double proposedTariff, double minimumTariff) {
 		// Trade Request Accepted

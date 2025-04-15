@@ -1,4 +1,11 @@
+//----------------------------------------------------------
+// Assignment 3
+// Question: part 1
+// Written by: Ziad Agha (40312869) and Abderrahmane Bensassi-Nour (40317017)
+//----------------------------------------------------------
+
 public class Product implements Comparable<Product> {
+	//Attributes
 	private String name;
 	private String country;
 	private String category;
@@ -49,11 +56,13 @@ public class Product implements Comparable<Product> {
 	
 
 	@Override
+	//toString
 	public String toString() {
 		return name + "," + country + "," + category + "," + price;
 	}
 
 	@Override
+	//compareTo
 	public int compareTo(Product other) {
 		return this.name.compareToIgnoreCase(other.name);
 	}

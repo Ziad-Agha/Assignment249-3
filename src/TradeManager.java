@@ -1,3 +1,9 @@
+//----------------------------------------------------------
+// Assignment 3
+// Question: part 1&2
+// Written by: Ziad Agha (40312869) and Abderrahmane Bensassi-Nour (40317017)
+//----------------------------------------------------------
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -23,6 +29,7 @@ public class TradeManager {
         }
     }
     }
+    //implementation of part 1 of the assignment
     public static void part1Imp() {
     	try {
 			Controller.addTariffs("src/files/TradeData.txt","src/files/UpdatedTradeData.txt");
@@ -34,6 +41,7 @@ public class TradeManager {
 		} 
     }
     
+    //implementation of part 2 of the assignment
     public static void part2Imp() {
     	System.out.println("Welcome to the Tariff Management System");
         System.out.println("Developed by [Your Name], Student ID: [Your ID]");

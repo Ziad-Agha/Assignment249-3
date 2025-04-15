@@ -1,3 +1,8 @@
+//----------------------------------------------------------
+// Assignment 3
+// Question: part 1
+// Written by: Ziad Agha (40312869) and Abderrahmane Bensassi-Nour (40317017)
+//----------------------------------------------------------
 
 public class Tariff {
 	private String destinationCountry;
@@ -6,7 +11,7 @@ public class Tariff {
 	private double minimumTariff;
 	
 	
-	
+	//Constructors
 	public Tariff(String destinationCountry, String originCountry, String productCategory, double minimumTariff) {
 		this.destinationCountry = destinationCountry;
 		this.originCountry = originCountry;
@@ -20,11 +25,14 @@ public class Tariff {
 		this.originCountry=obj.originCountry;
 		this.productCategory=obj.productCategory;
 	}
+	
+	//Clone method
 	public Tariff clone() {
 		return new Tariff(this);
 		
 	}
 	
+	//equals
 	public boolean equals(Tariff obj) {
 		return this.destinationCountry.equals(obj.destinationCountry)&&
 		this.minimumTariff==obj.minimumTariff&&
@@ -32,12 +40,14 @@ public class Tariff {
 		this.productCategory.equals(obj.productCategory);
 	}
 	
+	//toString
 	@Override
 	public String toString() {
 		return "Tariff [destinationCountry=" + destinationCountry + ", originCountry=" + originCountry
 				+ ", productCategory=" + productCategory + ", minimumTariff=" + minimumTariff + "]";
 	}
 
+	//Getter and Setters
 	public String getDestinationCountry() {
 		return destinationCountry;
 	}
